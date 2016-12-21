@@ -16,4 +16,24 @@ public class CrossfadeActivity extends Activity {
     
     mShortAnimationDuration = getResources().getInteger(android.R.integer.config_shortAnimTime);
     
+    private void crossfade() {
+
+      mContentView.setAlpha(0f);
+      mContentView.setVisibility(View.VISIBLE);
+      
+      mContentView.animate()
+        .alpha(1f)
+        .setDuration(mShortAnimationDuration)
+        .setListener(null);
+      
+      mLoadingView.animate()
+        .alpha(0f)
+        .setDuration(mShortAnimationDuration)
+        .setListener(new AnimatorListenerAdapter() {
+          @Override
+          public void onAnimationEnd(Animator animator){
+            mLoadingView.setVisibility(View.GONE);
+          }
+        });
+    }
 }    
